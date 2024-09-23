@@ -1,50 +1,64 @@
 const numeroTurno = document.querySelector(".numero-turno");
 
-let numeroTurnoDisplay: number = 0; 
+let numeroTurnoDisplay: number = 1; 
 
-if (numeroTurno !== null && numeroTurno !== undefined) {
-    numeroTurnoDisplay = parseInt(numeroTurno.innerHTML);
-}
+// if (numeroTurno) {
+//     numeroTurnoDisplay = parseInt(numeroTurno.innerHTML);
+// }
 
 function sumarNumero(): void {
     numeroTurnoDisplay += 1; // Suma 1 al número
-    if(numeroTurno !== null && numeroTurno !== undefined) {
+    if(numeroTurno && numeroTurno instanceof HTMLHeadingElement) {
         numeroTurno.innerHTML = numeroTurnoDisplay.toString().padStart(2, '0');
     }
 }
 
 function restarNumero(): void {
     numeroTurnoDisplay -= 1; // Restar 1 al número
-    if(numeroTurno !== null && numeroTurno !== undefined) {
+    if(numeroTurno && numeroTurno instanceof HTMLHeadingElement) {
         numeroTurno.innerHTML = numeroTurnoDisplay.toString().padStart(2, '0');
     }
 }
 
 function resetNumero(): void {
-    if(numeroTurno !== null && numeroTurno !== undefined) {
-        numeroTurno.innerHTML = '00';
-    }
-}
-
-function cambiarNumero(): void {
-    const numeroParaCambiar = (document.getElementById("cambiarnumero") as HTMLInputElement).value;
-    numeroTurnoDisplay = parseInt(numeroParaCambiar);
-    if(numeroTurno !== null && numeroTurno !== undefined) {
+    numeroTurnoDisplay = 0;
+    if(numeroTurno && numeroTurno instanceof HTMLHeadingElement) {
         numeroTurno.innerHTML = numeroTurnoDisplay.toString().padStart(2, '0');
     }
 }
 
-const botonSiguiente = document.getElementById("siguiente") as HTMLButtonElement;
-botonSiguiente.addEventListener("click", sumarNumero);
+function cambiarNumero(): void {
+    const elementoNumeroParaCambiar = document.getElementById("cambiarnumero");
+    if(elementoNumeroParaCambiar && elementoNumeroParaCambiar instanceof HTMLInputElement){
+        const valorInput = elementoNumeroParaCambiar.value;
+        numeroTurnoDisplay = parseInt(valorInput);
+        if(numeroTurno && numeroTurno instanceof HTMLHeadingElement) {
+            numeroTurno.innerHTML = numeroTurnoDisplay.toString().padStart(2, '0');
+        }
+    }
+   
+}
 
-const botonAnterior = document.getElementById("anterior") as HTMLButtonElement;
-botonAnterior.addEventListener("click", restarNumero);
+const botonSiguiente = document.getElementById("siguiente");
+if(botonSiguiente && botonSiguiente instanceof HTMLButtonElement) {
+    botonSiguiente.addEventListener("click", sumarNumero);
+}
 
-const botonReset = document.getElementById("reset") as HTMLButtonElement;
-botonReset.addEventListener("click", resetNumero);
+const botonAnterior = document.getElementById("anterior");
+if(botonAnterior && botonAnterior instanceof HTMLButtonElement) {
+    botonAnterior.addEventListener("click", restarNumero);
+}
 
-const botonCambiar = document.getElementById("cambiar") as HTMLButtonElement;
-botonCambiar.addEventListener("click", cambiarNumero);
+const botonReset = document.getElementById("reset");
+if(botonReset && botonReset instanceof HTMLButtonElement) {
+    botonReset.addEventListener("click", resetNumero);
+}
+
+const botonCambiar = document.getElementById("cambiar");
+if(botonCambiar && botonCambiar instanceof HTMLButtonElement){
+    botonCambiar.addEventListener("click", cambiarNumero);
+}
+
 
 
 
